@@ -116,7 +116,7 @@
       </div>
     </div>
 
-    <!-- Quick controls -->
+    <!-- Quick controls (Sound, Info, Restart) -->
     <div class="flex items-center gap-1.5">
       <!-- Sound toggle -->
       <button id="soundToggleBtn" class="p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-500/40 active:scale-95 transition-all text-xs flex items-center gap-1" title="Toggle Sound">
@@ -145,30 +145,36 @@
     </div>
   </div>
 
-  <!-- TOP HUD (4 METRICS GRID - COMPACT NON-SCROLLING) -->
-  <header class="w-full grid grid-cols-4 gap-2 sm:gap-3 my-1 sm:my-1.5 shrink-0" aria-label="Game HUD">
+  <!-- TOP HUD (5 METRICS GRID - COMPACT NON-SCROLLING) -->
+  <header class="w-full grid grid-cols-5 gap-1.5 sm:gap-2.5 my-1 sm:my-1.5 shrink-0" aria-label="Game HUD">
+    <!-- Level / Difficulty -->
+    <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-1 sm:p-2 flex flex-col items-center shadow">
+      <span class="text-[7px] sm:text-[9px] uppercase tracking-wider text-cyan-400 font-bold mb-0.5 whitespace-nowrap">Level</span>
+      <span id="levelDisplay" class="text-sm sm:text-xl font-black text-cyan-300 leading-tight">Lvl 2</span>
+    </div>
+
     <!-- Current Score -->
-    <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-1.5 sm:p-2.5 flex flex-col items-center shadow">
-      <span class="text-[8px] sm:text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-0.5 whitespace-nowrap">Score</span>
-      <span id="scoreDisplay" class="text-base sm:text-2xl font-black text-cyan-400 leading-tight">0</span>
+    <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-1 sm:p-2 flex flex-col items-center shadow">
+      <span class="text-[7px] sm:text-[9px] uppercase tracking-wider text-slate-500 font-bold mb-0.5 whitespace-nowrap">Score</span>
+      <span id="scoreDisplay" class="text-sm sm:text-xl font-black text-white leading-tight">0</span>
     </div>
 
     <!-- Streak Multiplier -->
-    <div id="streakBox" class="bg-slate-900/80 border-2 border-emerald-500/40 rounded-xl p-1.5 sm:p-2.5 flex flex-col items-center shadow-[0_0_12px_rgba(16,185,129,0.1)] transition-all">
-      <span class="text-[8px] sm:text-[10px] uppercase tracking-wider text-emerald-400 font-bold mb-0.5 whitespace-nowrap">Streak</span>
-      <span id="streakDisplay" class="text-base sm:text-2xl font-black text-white leading-tight">x1</span>
+    <div id="streakBox" class="bg-slate-900/80 border-2 border-emerald-500/40 rounded-xl p-1 sm:p-2 flex flex-col items-center shadow-[0_0_12px_rgba(16,185,129,0.1)] transition-all">
+      <span class="text-[7px] sm:text-[9px] uppercase tracking-wider text-emerald-400 font-bold mb-0.5 whitespace-nowrap">Streak</span>
+      <span id="streakDisplay" class="text-sm sm:text-xl font-black text-emerald-400 leading-tight">x1</span>
     </div>
 
     <!-- Words Solved -->
-    <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-1.5 sm:p-2.5 flex flex-col items-center shadow">
-      <span class="text-[8px] sm:text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-0.5 whitespace-nowrap">Solved</span>
-      <span id="wordsSolvedDisplay" class="text-base sm:text-2xl font-black text-white leading-tight">0</span>
+    <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-1 sm:p-2 flex flex-col items-center shadow">
+      <span class="text-[7px] sm:text-[9px] uppercase tracking-wider text-slate-500 font-bold mb-0.5 whitespace-nowrap">Solved</span>
+      <span id="wordsSolvedDisplay" class="text-sm sm:text-xl font-black text-white leading-tight">0</span>
     </div>
 
     <!-- High Score -->
-    <div class="bg-slate-900/80 border-2 border-amber-500/40 rounded-xl p-1.5 sm:p-2.5 flex flex-col items-center shadow-[0_0_12px_rgba(245,158,11,0.1)]">
-      <span class="text-[8px] sm:text-[10px] uppercase tracking-wider text-amber-400 font-bold mb-0.5 whitespace-nowrap">Best</span>
-      <span id="highScoreDisplay" class="text-base sm:text-2xl font-black text-white leading-tight">0</span>
+    <div class="bg-slate-900/80 border-2 border-amber-500/40 rounded-xl p-1 sm:p-2 flex flex-col items-center shadow-[0_0_12px_rgba(245,158,11,0.1)]">
+      <span class="text-[7px] sm:text-[9px] uppercase tracking-wider text-amber-400 font-bold mb-0.5 whitespace-nowrap">Best</span>
+      <span id="highScoreDisplay" class="text-sm sm:text-xl font-black text-amber-300 leading-tight">0</span>
     </div>
   </header>
 
@@ -288,34 +294,65 @@
 
   <!-- MODAL: START SCREEN -->
   <div id="startModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-50 transition-opacity duration-300">
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 max-w-sm w-full shadow-2xl text-center relative overflow-hidden">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-7 max-w-sm w-full shadow-2xl text-center relative overflow-hidden">
       <!-- Top icon -->
-      <div class="w-16 h-16 rounded-2xl bg-cyan-600 flex items-center justify-center mx-auto mb-4 font-black text-white text-3xl shadow-lg shadow-cyan-600/30">
+      <div class="w-14 h-14 rounded-2xl bg-cyan-600 flex items-center justify-center mx-auto mb-3 font-black text-white text-2xl shadow-lg shadow-cyan-600/30">
         WR
       </div>
-      <h2 class="font-black text-2xl tracking-wider text-white mb-1">
+      <h2 class="font-black text-xl sm:text-2xl tracking-wider text-white mb-0.5">
         WORD RUSH
       </h2>
-      <p class="text-xs text-slate-400 font-semibold tracking-widest uppercase mb-6">4-Letter Word Blitz</p>
+      <p class="text-[11px] text-slate-400 font-semibold tracking-widest uppercase mb-4">4-Letter Word Blitz</p>
+
+      <!-- Level / Difficulty Speed Selector (Prominent before starting) -->
+      <div class="mb-4 text-left">
+        <div class="flex items-center justify-between mb-1.5 px-0.5">
+          <label class="text-[11px] uppercase tracking-wider font-extrabold text-cyan-400 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            <span>Select Level / Speed</span>
+          </label>
+          <span id="startModalDiffDesc" class="text-[10px] font-semibold text-slate-300">10s initial, +2.5s bonus</span>
+        </div>
+        <div class="grid grid-cols-3 gap-1.5 p-1 bg-slate-950/80 border border-slate-800 rounded-xl">
+          <!-- Level 1 (Easy) -->
+          <button type="button" data-diff="easy" class="modal-diff-btn py-2 px-1 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white flex flex-col items-center gap-0.5">
+            <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">★ Level 1</span>
+            <span class="font-extrabold text-xs">Easy</span>
+            <span class="text-[9px] opacity-70 font-normal">14s (+3.5s)</span>
+          </button>
+          <!-- Level 2 (Medium) -->
+          <button type="button" data-diff="medium" class="modal-diff-btn py-2 px-1 rounded-lg text-xs font-bold transition-all bg-cyan-600 text-white shadow-md flex flex-col items-center gap-0.5">
+            <span class="text-[10px] font-black uppercase tracking-wider text-cyan-200">★★ Level 2</span>
+            <span class="font-extrabold text-xs">Medium</span>
+            <span class="text-[9px] opacity-80 font-normal">10s (+2.5s)</span>
+          </button>
+          <!-- Level 3 (Hard) -->
+          <button type="button" data-diff="hard" class="modal-diff-btn py-2 px-1 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white flex flex-col items-center gap-0.5">
+            <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">★★★ Level 3</span>
+            <span class="font-extrabold text-xs">Hard</span>
+            <span class="text-[9px] opacity-70 font-normal">6.5s (+1.5s)</span>
+          </button>
+        </div>
+      </div>
 
       <!-- Rules list -->
-      <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-4 text-left text-xs text-slate-300 space-y-2.5 mb-6">
-        <div class="flex items-start gap-2.5">
-          <div class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">1</div>
+      <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3 text-left text-xs text-slate-300 space-y-2 mb-4">
+        <div class="flex items-start gap-2">
+          <div class="w-4 h-4 rounded-full bg-cyan-500/20 text-cyan-400 font-bold flex items-center justify-center text-[9px] shrink-0 mt-0.5">1</div>
           <span>Unscramble the 4 letters into any valid English word.</span>
         </div>
-        <div class="flex items-start gap-2.5">
-          <div class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">2</div>
-          <span>Each correct word earns points and adds <strong class="text-emerald-400">+2.5s</strong> back!</span>
+        <div class="flex items-start gap-2">
+          <div class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center text-[9px] shrink-0 mt-0.5">2</div>
+          <span>Correct words earn score points & restore countdown time!</span>
         </div>
-        <div class="flex items-start gap-2.5">
-          <div class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">3</div>
+        <div class="flex items-start gap-2">
+          <div class="w-4 h-4 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center text-[9px] shrink-0 mt-0.5">3</div>
           <span>Chain words for higher <strong class="text-amber-400">Streak Multipliers</strong>.</span>
         </div>
       </div>
 
       <!-- Start button -->
-      <button id="startGameBtn" class="w-full py-3.5 px-6 rounded-full bg-cyan-600 hover:bg-cyan-500 text-white font-black text-sm tracking-wider active:scale-95 transition-all shadow-[0_8px_20px_rgba(8,145,178,0.4)] flex items-center justify-center gap-2">
+      <button id="startGameBtn" class="w-full py-3 px-6 rounded-full bg-cyan-600 hover:bg-cyan-500 text-white font-black text-sm tracking-wider active:scale-95 transition-all shadow-[0_8px_20px_rgba(8,145,178,0.4)] flex items-center justify-center gap-2">
         <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
           <path d="M8 5v14l11-7z"/>
         </svg>
@@ -324,53 +361,99 @@
     </div>
   </div>
 
-  <!-- MODAL: GAME OVER -->
+  <!-- MODAL: GAME OVER / SCORE SCREEN -->
   <div id="gameOverModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4 z-50 hidden transition-opacity duration-300">
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 max-w-sm w-full shadow-2xl text-center relative overflow-hidden animate-pop">
-      <!-- Title -->
-      <span class="inline-block px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 font-bold text-xs uppercase tracking-widest mb-2">Time's Up!</span>
-      <h2 class="font-black text-2xl text-white mb-4 tracking-wide">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 max-w-sm w-full shadow-2xl text-center relative overflow-hidden animate-pop">
+      <!-- Title & Mode Badge -->
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <span class="inline-block px-2.5 py-0.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 font-bold text-[11px] uppercase tracking-wider">Time's Up!</span>
+        <span id="modalDiffBadge" class="inline-block px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold text-[11px] uppercase tracking-wider">Medium Mode</span>
+      </div>
+      <h2 class="font-black text-2xl text-white mb-2.5 tracking-wide">
         GAME OVER
       </h2>
 
       <!-- New high score banner -->
-      <div id="newHighScoreBanner" class="hidden mb-4 p-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold uppercase tracking-wider animate-bounce">
+      <div id="newHighScoreBanner" class="hidden mb-3 p-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold uppercase tracking-wider animate-bounce">
         🏆 NEW HIGH SCORE! 🏆
       </div>
 
       <!-- Stats Grid -->
-      <div class="grid grid-cols-2 gap-2.5 mb-4">
-        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-2.5">
-          <p class="text-[10px] uppercase text-slate-500 font-bold tracking-wider">Final Score</p>
-          <p id="modalFinalScore" class="font-black text-2xl text-cyan-400">0</p>
+      <div class="grid grid-cols-2 gap-2 mb-3">
+        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-2">
+          <p class="text-[9px] uppercase text-slate-500 font-bold tracking-wider">Final Score</p>
+          <p id="modalFinalScore" class="font-black text-xl sm:text-2xl text-cyan-400">0</p>
         </div>
-        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-2.5">
-          <p class="text-[10px] uppercase text-slate-500 font-bold tracking-wider">Words Solved</p>
-          <p id="modalWordsSolved" class="font-black text-2xl text-white">0</p>
+        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-2">
+          <p class="text-[9px] uppercase text-slate-500 font-bold tracking-wider">Words Solved</p>
+          <p id="modalWordsSolved" class="font-black text-xl sm:text-2xl text-white">0</p>
         </div>
-        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-2.5">
-          <p class="text-[10px] uppercase text-slate-500 font-bold tracking-wider">Max Streak</p>
-          <p id="modalMaxStreak" class="font-black text-2xl text-emerald-400">x1</p>
+        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-2">
+          <p class="text-[9px] uppercase text-slate-500 font-bold tracking-wider">Max Streak</p>
+          <p id="modalMaxStreak" class="font-black text-xl sm:text-2xl text-emerald-400">x1</p>
         </div>
-        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-2.5">
-          <p class="text-[10px] uppercase text-slate-500 font-bold tracking-wider">Best Record</p>
-          <p id="modalHighScore" class="font-black text-2xl text-amber-400">0</p>
+        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-2">
+          <p class="text-[9px] uppercase text-slate-500 font-bold tracking-wider">Best Record</p>
+          <p id="modalHighScore" class="font-black text-xl sm:text-2xl text-amber-400">0</p>
         </div>
       </div>
 
       <!-- Missed Answers Box -->
-      <div id="missedWordBox" class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-2.5 mb-5 text-xs text-slate-300">
-        <span class="text-slate-500 text-[10px] uppercase tracking-wider font-bold block mb-1">Possible Answers:</span>
-        <span id="missedWordList" class="font-black text-amber-400 tracking-wider text-sm">--</span>
+      <div id="missedWordBox" class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-2 mb-3 text-xs text-slate-300">
+        <span class="text-slate-500 text-[9px] uppercase tracking-wider font-bold block mb-0.5">Possible Answers:</span>
+        <span id="missedWordList" class="font-black text-amber-400 tracking-wider text-xs sm:text-sm">--</span>
       </div>
 
-      <!-- Play Again button -->
-      <button id="playAgainBtn" class="w-full py-3.5 px-6 rounded-full bg-cyan-600 hover:bg-cyan-500 text-white font-black text-sm tracking-wider active:scale-95 transition-all shadow-[0_8px_20px_rgba(8,145,178,0.4)] flex items-center justify-center gap-2">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-        </svg>
-        <span>PLAY AGAIN</span>
-      </button>
+      <!-- Level Selector on Game Over / Play Again Screen -->
+      <div class="mb-3 text-left">
+        <div class="flex items-center justify-between mb-1 px-0.5">
+          <label class="text-[10px] uppercase tracking-wider font-extrabold text-cyan-400 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            <span>Next Round Level</span>
+          </label>
+          <span id="gameOverDiffDesc" class="text-[9px] font-semibold text-slate-300">10s initial, +2.5s bonus</span>
+        </div>
+        <div class="grid grid-cols-3 gap-1.5 p-1 bg-slate-950/80 border border-slate-800 rounded-xl">
+          <!-- Level 1 (Easy) -->
+          <button type="button" data-diff="easy" class="gameover-diff-btn py-2 px-1 rounded-xl text-xs font-bold transition-all bg-slate-900/40 text-slate-400 hover:text-white hover:bg-slate-900 border border-slate-800/80 flex flex-col items-center gap-0.5">
+            <span class="text-[9px] font-black uppercase tracking-wider text-slate-400">★ Lvl 1</span>
+            <span class="font-extrabold text-[11px]">Easy</span>
+            <span class="text-[8px] opacity-70 font-normal">14s (+3.5s)</span>
+          </button>
+          <!-- Level 2 (Medium) -->
+          <button type="button" data-diff="medium" class="gameover-diff-btn py-2 px-1 rounded-xl text-xs font-bold transition-all bg-cyan-600 text-white shadow-lg shadow-cyan-600/30 flex flex-col items-center gap-0.5 border border-cyan-400/40 ring-2 ring-cyan-500/20">
+            <span class="text-[9px] font-black uppercase tracking-wider text-cyan-200">★★ Lvl 2</span>
+            <span class="font-extrabold text-[11px]">Medium</span>
+            <span class="text-[8px] opacity-80 font-normal">10s (+2.5s)</span>
+          </button>
+          <!-- Level 3 (Hard) -->
+          <button type="button" data-diff="hard" class="gameover-diff-btn py-2 px-1 rounded-xl text-xs font-bold transition-all bg-slate-900/40 text-slate-400 hover:text-white hover:bg-slate-900 border border-slate-800/80 flex flex-col items-center gap-0.5">
+            <span class="text-[9px] font-black uppercase tracking-wider text-slate-400">★★★ Lvl 3</span>
+            <span class="font-extrabold text-[11px]">Hard</span>
+            <span class="text-[8px] opacity-70 font-normal">6.5s (+1.5s)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Action Buttons: WhatsApp Share & Play Again -->
+      <div class="flex flex-col gap-2">
+        <!-- WhatsApp Share Button -->
+        <button id="whatsappShareBtn" class="w-full py-2.5 px-4 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-black text-xs sm:text-sm tracking-wider active:scale-95 transition-all shadow-[0_4px_14px_rgba(37,211,102,0.35)] flex items-center justify-center gap-2">
+          <!-- WhatsApp official icon -->
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.584 1.761.884 2.802.884 3.183 0 5.768-2.587 5.768-5.767.001-3.18-2.584-5.77-5.774-5.77zm8.435 5.766c-.002 4.673-3.8 8.472-8.47 8.472-1.488 0-2.888-.387-4.113-1.065l-4.57 1.198 1.226-4.453c-.767-1.28-1.213-2.775-1.214-4.152.002-4.673 3.801-8.472 8.471-8.472 4.67 0 8.47 3.799 8.47 8.472zm-4.708 3.518c-.259-.13-1.533-.757-1.771-.844-.238-.086-.411-.13-.585.13-.173.259-.67 1.018-.822 1.191-.152.173-.304.195-.563.065-.259-.13-1.096-.404-2.088-1.288-.772-.689-1.293-1.54-1.445-1.8-.152-.259-.016-.399.113-.528.117-.116.259-.302.389-.453.13-.152.173-.259.259-.432.087-.173.043-.324-.022-.453-.065-.13-.585-1.408-.801-1.928-.211-.506-.425-.437-.585-.445l-.498-.009c-.173 0-.455.065-.693.324-.238.259-.91.89-.91 2.17 0 1.28.932 2.518 1.062 2.691.13.173 1.834 2.8 4.444 3.926.621.268 1.106.428 1.484.549.624.2 1.191.171 1.639.105.5-.075 1.533-.627 1.749-1.233.216-.606.216-1.125.152-1.233-.065-.108-.238-.173-.497-.303z"/>
+          </svg>
+          <span>SHARE TO WHATSAPP</span>
+        </button>
+
+        <!-- Play Again button -->
+        <button id="playAgainBtn" class="w-full py-2.5 px-4 rounded-full bg-cyan-600 hover:bg-cyan-500 text-white font-black text-xs sm:text-sm tracking-wider active:scale-95 transition-all shadow-[0_6px_16px_rgba(8,145,178,0.4)] flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+          </svg>
+          <span>PLAY AGAIN</span>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -386,23 +469,23 @@
       <ul class="text-xs text-slate-300 space-y-2.5 leading-relaxed">
         <li class="flex items-start gap-2">
           <span class="text-cyan-400 font-bold">•</span>
-          <span><strong>Tap letter tiles</strong> or type on your keyboard to spell a valid 4-letter English word.</span>
+          <span><strong>Spell Words:</strong> Tap letters or type on keyboard to spell any valid 4-letter English word.</span>
         </li>
         <li class="flex items-start gap-2">
           <span class="text-emerald-400 font-bold">•</span>
-          <span><strong>Auto-Submit:</strong> As soon as all 4 slots are filled, validation happens instantly.</span>
+          <span><strong>Auto-Submit:</strong> Fills all 4 slots for instant verification.</span>
         </li>
         <li class="flex items-start gap-2">
           <span class="text-amber-400 font-bold">•</span>
-          <span><strong>Undo:</strong> Tap any filled slot box to return that letter to the pool.</span>
+          <span><strong>Adjustable Speeds:</strong> Switch between <strong>Easy</strong> (14s, +3.5s), <strong>Medium</strong> (10s, +2.5s), or <strong>Hard</strong> (6.5s, +1.5s).</span>
         </li>
         <li class="flex items-start gap-2">
           <span class="text-purple-400 font-bold">•</span>
-          <span><strong>Anagrams:</strong> Any valid dictionary word made from the 4 letters is accepted!</span>
+          <span><strong>Streaks:</strong> Chain consecutive words to boost your score multiplier!</span>
         </li>
         <li class="flex items-start gap-2">
-          <span class="text-red-400 font-bold">•</span>
-          <span><strong>Timer:</strong> Each correct word earns score and adds <strong class="text-emerald-400">+2.5s</strong> back to the countdown!</span>
+          <span class="text-[#25D366] font-bold">•</span>
+          <span><strong>WhatsApp Share:</strong> Share your best scores & challenge friends directly via WhatsApp!</span>
         </li>
       </ul>
       <button id="gotItBtn" class="w-full mt-5 py-2.5 rounded-full bg-slate-800 hover:bg-slate-700 font-bold text-xs text-cyan-300 transition-all uppercase tracking-wider">
@@ -578,18 +661,46 @@
     // ==========================================
     // 3. GAME STATE & CONSTANTS
     // ==========================================
-    const MAX_TIME = 12.0;
-    const INITIAL_TIME = 10.0;
-    const TIME_BONUS = 2.5;
+    const DIFFICULTIES = {
+      easy: {
+        id: 'easy',
+        name: 'Easy',
+        initialTime: 14.0,
+        timeBonus: 3.5,
+        maxTime: 16.0,
+        desc: '14s initial, +3.5s bonus'
+      },
+      medium: {
+        id: 'medium',
+        name: 'Medium',
+        initialTime: 10.0,
+        timeBonus: 2.5,
+        maxTime: 12.0,
+        desc: '10s initial, +2.5s bonus'
+      },
+      hard: {
+        id: 'hard',
+        name: 'Hard',
+        initialTime: 6.5,
+        timeBonus: 1.5,
+        maxTime: 8.0,
+        desc: '6.5s initial, +1.5s bonus'
+      }
+    };
+
     const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * 46; // ~289
 
+    const savedDiff = localStorage.getItem('wordrush_difficulty');
+    const initialDifficulty = DIFFICULTIES[savedDiff] ? savedDiff : 'medium';
+
     const state = {
+      difficulty: initialDifficulty,
       score: 0,
       streak: 1,
       maxStreak: 1,
       wordsSolved: 0,
-      highScore: parseInt(localStorage.getItem('wordrush_highscore') || '0', 10),
-      timeRemaining: INITIAL_TIME,
+      highScore: parseInt(localStorage.getItem(`wordrush_highscore_${initialDifficulty}`) || localStorage.getItem('wordrush_highscore') || '0', 10),
+      timeRemaining: DIFFICULTIES[initialDifficulty].initialTime,
       isRunning: false,
       isChecking: false,
       currentPuzzle: null,
@@ -600,6 +711,7 @@
 
     // DOM Elements Cache
     const elements = {
+      levelDisplay: document.getElementById('levelDisplay'),
       scoreDisplay: document.getElementById('scoreDisplay'),
       streakDisplay: document.getElementById('streakDisplay'),
       streakBox: document.getElementById('streakBox'),
@@ -623,6 +735,12 @@
       startModal: document.getElementById('startModal'),
       startGameBtn: document.getElementById('startGameBtn'),
       gameOverModal: document.getElementById('gameOverModal'),
+      modalDiffBadge: document.getElementById('modalDiffBadge'),
+      whatsappShareBtn: document.getElementById('whatsappShareBtn'),
+      modalDiffBtns: document.querySelectorAll('.modal-diff-btn'),
+      gameoverDiffBtns: document.querySelectorAll('.gameover-diff-btn'),
+      startModalDiffDesc: document.getElementById('startModalDiffDesc'),
+      gameOverDiffDesc: document.getElementById('gameOverDiffDesc'),
       newHighScoreBanner: document.getElementById('newHighScoreBanner'),
       modalFinalScore: document.getElementById('modalFinalScore'),
       modalWordsSolved: document.getElementById('modalWordsSolved'),
@@ -672,17 +790,22 @@
     // 5. GAME UI UPDATES & RENDERING
     // ==========================================
     function updateHUD() {
+      const currentDiff = DIFFICULTIES[state.difficulty] || DIFFICULTIES.medium;
+      if (elements.levelDisplay) {
+        const lvlNum = state.difficulty === 'easy' ? '1' : (state.difficulty === 'medium' ? '2' : '3');
+        elements.levelDisplay.textContent = `Lvl ${lvlNum}`;
+      }
       elements.scoreDisplay.textContent = state.score.toLocaleString();
       elements.streakDisplay.textContent = `x${state.streak}`;
       elements.wordsSolvedDisplay.textContent = state.wordsSolved;
       elements.highScoreDisplay.textContent = state.highScore.toLocaleString();
 
       if (state.streak >= 3) {
-        elements.streakBox.className = "bg-slate-900/90 border-2 border-emerald-400 rounded-2xl p-3 sm:p-4 flex flex-col items-center shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all";
+        elements.streakBox.className = "bg-slate-900/90 border-2 border-emerald-400 rounded-xl p-1 sm:p-2 flex flex-col items-center shadow-[0_0_16px_rgba(16,185,129,0.25)] transition-all";
       } else if (state.streak >= 2) {
-        elements.streakBox.className = "bg-slate-900/80 border-2 border-emerald-500/60 rounded-2xl p-3 sm:p-4 flex flex-col items-center shadow-[0_0_15px_rgba(16,185,129,0.2)] transition-all";
+        elements.streakBox.className = "bg-slate-900/80 border-2 border-emerald-500/60 rounded-xl p-1 sm:p-2 flex flex-col items-center shadow-[0_0_12px_rgba(16,185,129,0.15)] transition-all";
       } else {
-        elements.streakBox.className = "bg-slate-900/80 border-2 border-emerald-500/40 rounded-2xl p-3 sm:p-4 flex flex-col items-center shadow-[0_0_15px_rgba(16,185,129,0.1)] transition-all";
+        elements.streakBox.className = "bg-slate-900/80 border-2 border-emerald-500/40 rounded-xl p-1 sm:p-2 flex flex-col items-center shadow-[0_0_8px_rgba(16,185,129,0.08)] transition-all";
       }
     }
 
@@ -728,14 +851,15 @@
     }
 
     function updateTimerVisual() {
+      const currentDiff = DIFFICULTIES[state.difficulty] || DIFFICULTIES.medium;
       const remaining = Math.max(0, state.timeRemaining);
       elements.timerText.textContent = `${remaining.toFixed(1)}s`;
 
-      const progressFraction = Math.min(1, Math.max(0, remaining / INITIAL_TIME));
+      const progressFraction = Math.min(1, Math.max(0, remaining / currentDiff.initialTime));
       const offset = CIRCLE_CIRCUMFERENCE * (1 - progressFraction);
       elements.timerProgressRing.style.strokeDashoffset = offset;
 
-      const timePercent = (remaining / INITIAL_TIME) * 100;
+      const timePercent = (remaining / currentDiff.initialTime) * 100;
       if (timePercent > 50) {
         elements.timerProgressRing.setAttribute('stroke', '#10b981');
         elements.timerText.className = 'font-mono text-emerald-400 font-bold';
@@ -749,6 +873,54 @@
         elements.timerText.className = 'font-mono text-red-400 font-bold';
         elements.circleDialContainer.classList.add('pulse-danger');
       }
+    }
+
+    function setDifficulty(diffId) {
+      if (!DIFFICULTIES[diffId]) return;
+      state.difficulty = diffId;
+      localStorage.setItem('wordrush_difficulty', diffId);
+
+      // Update start modal buttons
+      elements.modalDiffBtns.forEach(btn => {
+        const isCurrent = btn.getAttribute('data-diff') === diffId;
+        if (isCurrent) {
+          btn.className = 'modal-diff-btn py-2.5 px-1 rounded-xl text-xs font-bold transition-all bg-cyan-600 text-white shadow-lg shadow-cyan-600/30 flex flex-col items-center gap-0.5 border border-cyan-400/40 ring-2 ring-cyan-500/20';
+        } else {
+          btn.className = 'modal-diff-btn py-2.5 px-1 rounded-xl text-xs font-bold transition-all bg-slate-900/40 text-slate-400 hover:text-white hover:bg-slate-900 border border-slate-800/80 flex flex-col items-center gap-0.5';
+        }
+      });
+
+      // Update game over / play again screen buttons
+      elements.gameoverDiffBtns.forEach(btn => {
+        const isCurrent = btn.getAttribute('data-diff') === diffId;
+        if (isCurrent) {
+          btn.className = 'gameover-diff-btn py-2 px-1 rounded-xl text-xs font-bold transition-all bg-cyan-600 text-white shadow-lg shadow-cyan-600/30 flex flex-col items-center gap-0.5 border border-cyan-400/40 ring-2 ring-cyan-500/20';
+        } else {
+          btn.className = 'gameover-diff-btn py-2 px-1 rounded-xl text-xs font-bold transition-all bg-slate-900/40 text-slate-400 hover:text-white hover:bg-slate-900 border border-slate-800/80 flex flex-col items-center gap-0.5';
+        }
+      });
+
+      if (elements.startModalDiffDesc) {
+        elements.startModalDiffDesc.textContent = DIFFICULTIES[diffId].desc;
+      }
+      if (elements.gameOverDiffDesc) {
+        elements.gameOverDiffDesc.textContent = DIFFICULTIES[diffId].desc;
+      }
+      if (elements.modalDiffBadge) {
+        elements.modalDiffBadge.textContent = `${DIFFICULTIES[diffId].name} Mode`;
+      }
+
+      // Load highscore for this difficulty
+      state.highScore = parseInt(localStorage.getItem(`wordrush_highscore_${diffId}`) || localStorage.getItem('wordrush_highscore') || '0', 10);
+      if (elements.modalHighScore) {
+        elements.modalHighScore.textContent = state.highScore.toLocaleString();
+      }
+
+      if (!state.isRunning) {
+        state.timeRemaining = DIFFICULTIES[diffId].initialTime;
+        updateTimerVisual();
+      }
+      updateHUD();
     }
 
     // ==========================================
@@ -833,14 +1005,15 @@
       const isValid = state.currentPuzzle.anagrams.includes(enteredWord) || DICTIONARY_SET.has(enteredWord);
 
       if (isValid) {
+        const currentDiff = DIFFICULTIES[state.difficulty] || DIFFICULTIES.medium;
         // Correct Word - tight, lesser scale (10 pts * streak multiplier)
         const points = 10 * state.streak;
         state.score += points;
         state.wordsSolved += 1;
-        state.timeRemaining = Math.min(MAX_TIME, state.timeRemaining + TIME_BONUS);
+        state.timeRemaining = Math.min(currentDiff.maxTime, state.timeRemaining + currentDiff.timeBonus);
 
         sound.playCorrect(state.streak);
-        spawnFloatingReward(points, TIME_BONUS);
+        spawnFloatingReward(points, currentDiff.timeBonus);
 
         elements.slotsContainer.classList.add('animate-correct');
         elements.slotBoxes.forEach(slot => {
@@ -854,6 +1027,7 @@
 
         if (state.score > state.highScore) {
           state.highScore = state.score;
+          localStorage.setItem(`wordrush_highscore_${state.difficulty}`, state.highScore);
           localStorage.setItem('wordrush_highscore', state.highScore);
         }
 
@@ -922,11 +1096,12 @@
         cancelAnimationFrame(state.animationFrameId);
       }
 
+      const currentDiff = DIFFICULTIES[state.difficulty] || DIFFICULTIES.medium;
       state.score = 0;
       state.streak = 1;
       state.maxStreak = 1;
       state.wordsSolved = 0;
-      state.timeRemaining = INITIAL_TIME;
+      state.timeRemaining = currentDiff.initialTime;
       state.isRunning = true;
       state.isChecking = false;
       state.lastTimestamp = 0;
@@ -953,13 +1128,16 @@
 
       sound.playGameOver();
 
+      const currentDiff = DIFFICULTIES[state.difficulty] || DIFFICULTIES.medium;
       const isNewBest = state.score > 0 && state.score >= state.highScore;
       if (state.score > state.highScore) {
         state.highScore = state.score;
+        localStorage.setItem(`wordrush_highscore_${state.difficulty}`, state.highScore);
         localStorage.setItem('wordrush_highscore', state.highScore);
       }
       updateHUD();
 
+      elements.modalDiffBadge.textContent = `${currentDiff.name} Mode`;
       elements.modalFinalScore.textContent = state.score.toLocaleString();
       elements.modalWordsSolved.textContent = state.wordsSolved;
       elements.modalMaxStreak.textContent = `x${state.maxStreak}`;
@@ -978,6 +1156,19 @@
       }
 
       elements.gameOverModal.classList.remove('hidden');
+    }
+
+    function shareToWhatsApp() {
+      const currentDiff = DIFFICULTIES[state.difficulty] || DIFFICULTIES.medium;
+      const playUrl = window.location.href;
+      const shareText = `⚡ *Word Rush - 4-Letter Blitz* ⚡\n` +
+        `🏆 Final Score: ${state.score} pts (${currentDiff.name} Mode)\n` +
+        `🔤 Words Solved: ${state.wordsSolved}\n` +
+        `🔥 Max Streak: x${state.maxStreak}\n\n` +
+        `Can you beat my high score? Play here:\n${playUrl}`;
+
+      const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+      window.open(waUrl, '_blank');
     }
 
     // ==========================================
@@ -1075,6 +1266,24 @@
 
     elements.startGameBtn.addEventListener('click', startNewGame);
     elements.playAgainBtn.addEventListener('click', startNewGame);
+    elements.whatsappShareBtn.addEventListener('click', shareToWhatsApp);
+
+    // Level / Difficulty selector buttons
+    elements.modalDiffBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const diff = btn.getAttribute('data-diff');
+        setDifficulty(diff);
+        sound.playTileSelect(0);
+      });
+    });
+
+    elements.gameoverDiffBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const diff = btn.getAttribute('data-diff');
+        setDifficulty(diff);
+        sound.playTileSelect(0);
+      });
+    });
 
     elements.infoBtn.addEventListener('click', () => {
       elements.infoModal.classList.remove('hidden');
@@ -1086,6 +1295,7 @@
       elements.infoModal.classList.add('hidden');
     });
 
+    setDifficulty(state.difficulty);
     updateHUD();
     updateTimerVisual();
   </script>
