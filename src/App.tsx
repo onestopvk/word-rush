@@ -9,25 +9,48 @@ import { WordShifterGame } from './components/WordShifterGame';
 import { ArcadeHubModal } from './components/ArcadeHubModal';
 import { InfoModal } from './components/InfoModal';
 
-export default function App() {
-  const [activeGame, setActiveGame] = useState<GameMode>(() => {
-    const hash = window.location.hash.toLowerCase();
-    if (hash.includes('math')) return 'math';
-    if (hash.includes('letterfall') || hash.includes('fall')) return 'letterfall';
-    if (hash.includes('shifter') || hash.includes('shift') || hash.includes('diagonal') || hash.includes('matrix')) return 'shifter';
-    return 'word';
-  });
+function getGameFromLocation(): GameMode {
+  const pathname = window.location.pathname.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+  const combined = `${pathname} ${hash}`;
 
+  if (combined.includes('/math') || combined.includes('math')) return 'math';
+  if (combined.includes('/letterfall') || combined.includes('letterfall') || combined.includes('letter-fall') || combined.includes('fall')) return 'letterfall';
+  if (combined.includes('/shifter') || combined.includes('shifter') || combined.includes('word-shifter') || combined.includes('shift') || combined.includes('diagonal') || combined.includes('matrix')) return 'shifter';
+  return 'word';
+}
+
+function getPathForGame(game: GameMode): string {
+  switch (game) {
+    case 'math':
+      return '/math';
+    case 'letterfall':
+      return '/letterfall';
+    case 'shifter':
+    case 'diagonal':
+      return '/shifter';
+    case 'word':
+    default:
+      return '/';
+  }
+}
+
+export default function App() {
+  const [activeGame, setActiveGame] = useState<GameMode>(() => getGameFromLocation());
   const [highScores, setHighScores] = useState<GameHighScores>(() => storageService.getHighScores());
   const [isHubOpen, setIsHubOpen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [gameResetKey, setGameResetKey] = useState(0);
 
-  // Sync hash
+  // Sync pathname cleanly with HTML5 History API
   const handleSelectGame = useCallback((game: GameMode) => {
     const canonicalGame = game === 'diagonal' ? 'shifter' : game;
     setActiveGame(canonicalGame);
-    window.location.hash = canonicalGame;
+    const targetPath = getPathForGame(canonicalGame);
+    
+    if (window.location.pathname !== targetPath || window.location.hash) {
+      window.history.pushState({ game: canonicalGame }, '', targetPath);
+    }
     setGameResetKey(prev => prev + 1);
   }, []);
 
@@ -39,22 +62,30 @@ export default function App() {
     setGameResetKey(prev => prev + 1);
   }, []);
 
-  // Listen for browser back/forward or hash change
+  // Clean initial hash into clean path if user visited with a # link
   useEffect(() => {
-    const onHashChange = () => {
-      const hash = window.location.hash.toLowerCase();
-      if (hash.includes('math') && activeGame !== 'math') {
-        setActiveGame('math');
-      } else if ((hash.includes('letterfall') || hash.includes('fall')) && activeGame !== 'letterfall') {
-        setActiveGame('letterfall');
-      } else if ((hash.includes('shifter') || hash.includes('shift') || hash.includes('diagonal') || hash.includes('matrix')) && activeGame !== 'shifter') {
-        setActiveGame('shifter');
-      } else if (hash.includes('word') && activeGame !== 'word') {
-        setActiveGame('word');
+    if (window.location.hash) {
+      const targetPath = getPathForGame(activeGame);
+      window.history.replaceState({ game: activeGame }, '', targetPath);
+    }
+  }, [activeGame]);
+
+  // Listen for browser navigation (back / forward buttons)
+  useEffect(() => {
+    const onLocationChange = () => {
+      const nextGame = getGameFromLocation();
+      if (nextGame !== activeGame) {
+        setActiveGame(nextGame);
+        setGameResetKey(prev => prev + 1);
       }
     };
-    window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
+
+    window.addEventListener('popstate', onLocationChange);
+    window.addEventListener('hashchange', onLocationChange);
+    return () => {
+      window.removeEventListener('popstate', onLocationChange);
+      window.removeEventListener('hashchange', onLocationChange);
+    };
   }, [activeGame]);
 
   // Global ESC listener to dismiss modals
