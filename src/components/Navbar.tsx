@@ -43,12 +43,14 @@ export const Navbar: React.FC<NavbarProps> = ({
   const isWord = activeGame === 'word';
   const isMath = activeGame === 'math';
   const isLetterFall = activeGame === 'letterfall';
+  const isMathFall = activeGame === 'mathfall';
   const isShifter = activeGame === 'shifter' || activeGame === 'diagonal';
 
   const getHeaderTheme = () => {
     if (isWord) return 'bg-slate-900/90 border-cyan-500/40 hover:border-cyan-400 text-cyan-300';
     if (isMath) return 'bg-slate-900/90 border-indigo-500/40 hover:border-indigo-400 text-indigo-300';
     if (isLetterFall) return 'bg-slate-900/90 border-emerald-500/40 hover:border-emerald-400 text-emerald-300';
+    if (isMathFall) return 'bg-slate-900/90 border-purple-500/40 hover:border-purple-400 text-purple-300';
     return 'bg-slate-900/90 border-amber-500/40 hover:border-amber-400 text-amber-300';
   };
 
@@ -56,6 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     if (isWord) return 'bg-cyan-950 border border-cyan-500/40 text-cyan-300';
     if (isMath) return 'bg-indigo-950 border border-indigo-500/40 text-indigo-300';
     if (isLetterFall) return 'bg-emerald-950 border border-emerald-500/40 text-emerald-300';
+    if (isMathFall) return 'bg-purple-950 border border-purple-500/40 text-purple-300';
     return 'bg-amber-950 border border-amber-500/40 text-amber-300';
   };
 
@@ -63,6 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     if (isWord) return 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30';
     if (isMath) return 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30';
     if (isLetterFall) return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
+    if (isMathFall) return 'bg-purple-500/20 text-purple-300 border-purple-500/30';
     return 'bg-amber-500/20 text-amber-300 border-amber-500/30';
   };
 
@@ -70,6 +74,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     if (isWord) return 'Word Rush';
     if (isMath) return 'Math Rush';
     if (isLetterFall) return 'Letter Fall';
+    if (isMathFall) return 'Math Fall';
     return 'Word Shifter';
   };
 
@@ -77,6 +82,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     if (isWord) return 'Anagrams';
     if (isMath) return 'Speed Calc';
     if (isLetterFall) return 'Word Drop';
+    if (isMathFall) return 'Equation Drop';
     return 'Word Ladder';
   };
 
@@ -97,7 +103,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div
             className={`w-6 h-6 rounded-lg flex items-center justify-center text-xs shadow-sm font-bold ${getHeaderIconBg()}`}
           >
-            {isWord ? '🔤' : isMath ? '🔢' : isLetterFall ? '🔠' : '🔀'}
+            {isWord ? '🔤' : isMath ? '🔢' : isLetterFall ? '🔠' : isMathFall ? '➗' : '🔀'}
           </div>
 
           {/* Active Title & Badge */}
@@ -129,7 +135,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <div className="px-2.5 py-1.5 text-[9px] uppercase tracking-wider font-extrabold text-slate-500 border-b border-slate-800/80 flex items-center justify-between">
               <span>Select Arcade Game</span>
-              <span className="text-emerald-400 font-bold">4 Active Games</span>
+              <span className="text-purple-400 font-bold">5 Active Games</span>
             </div>
 
             <div className="py-1 space-y-1">
@@ -229,7 +235,39 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </span>
               </button>
 
-              {/* Option 4: Word Shifter */}
+              {/* Option 4: Math Fall */}
+              <button
+                id="dropdownItemMathFall"
+                type="button"
+                onClick={() => {
+                  onSelectGame('mathfall');
+                  setDropdownOpen(false);
+                }}
+                className={`w-full flex items-center justify-between p-2 rounded-xl transition-all text-left group cursor-pointer ${
+                  isMathFall
+                    ? 'bg-purple-950/60 border border-purple-500/50 text-purple-200'
+                    : 'hover:bg-purple-950/30 border border-transparent hover:border-purple-500/30 text-slate-300'
+                }`}
+                role="menuitem"
+              >
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-purple-950 border border-purple-500/40 flex items-center justify-center text-sm">
+                    ➗
+                  </div>
+                  <div>
+                    <div className="font-extrabold text-xs text-slate-200 group-hover:text-purple-300 flex items-center gap-1.5">
+                      <span>Math Fall</span>
+                      {isMathFall && <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />}
+                    </div>
+                    <p className="text-[10px] text-slate-400">Falling equation arithmetic drop</p>
+                  </div>
+                </div>
+                <span className="text-[10px] font-black text-purple-300 font-mono bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800">
+                  {highScores.mathFall} pts
+                </span>
+              </button>
+
+              {/* Option 5: Word Shifter */}
               <button
                 id="dropdownItemShifter"
                 type="button"

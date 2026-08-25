@@ -183,7 +183,51 @@ export const ArcadeHubModal: React.FC<ArcadeHubModalProps> = ({
             </div>
           </div>
 
-          {/* Card 4: Word Shifter */}
+          {/* Card 4: Math Fall */}
+          <div
+            onClick={() => {
+              onSelectGame('mathfall');
+              onClose();
+            }}
+            className={`p-3 rounded-xl transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 cursor-pointer ${
+              activeGame === 'mathfall'
+                ? 'bg-purple-950/40 border-2 border-purple-500/60 shadow-[0_0_15px_rgba(168,85,247,0.2)]'
+                : 'bg-slate-950/60 hover:bg-purple-950/30 border border-slate-800 hover:border-purple-500/50'
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-purple-950 border border-purple-500/40 flex items-center justify-center text-xl shrink-0">
+                ➗
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="font-black text-sm text-white">Math Fall</h3>
+                  <span className="px-1.5 py-0.2 rounded bg-purple-500/30 text-purple-200 border border-purple-400/40 text-[9px] font-black uppercase">
+                    {activeGame === 'mathfall' ? 'Playing Now' : 'Ready'}
+                  </span>
+                </div>
+                <p className="text-xs text-slate-400">Falling single & 2-digit equations — solve arithmetic before laser impact</p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-3 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-800/80">
+              <div className="text-right">
+                <span className="text-[9px] uppercase tracking-wider text-slate-500 font-bold block">Best Score</span>
+                <span className="text-xs font-black text-purple-300 font-mono flex items-center gap-1">
+                  <Trophy className="w-3.5 h-3.5 text-amber-400" /> {highScores.mathFall} pts
+                </span>
+              </div>
+              <button
+                type="button"
+                className="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs flex items-center gap-1 shadow cursor-pointer"
+              >
+                <Play className="w-3 h-3 fill-white" />
+                <span>Play</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Card 5: Word Shifter */}
           <div
             onClick={() => {
               onSelectGame('shifter');

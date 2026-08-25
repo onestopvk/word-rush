@@ -371,15 +371,22 @@ export const LetterFallGame: React.FC<LetterFallGameProps> = ({
       className="w-full flex-1 flex flex-col items-center justify-between min-h-0 select-none py-1"
     >
       {/* 1. TOP HUD (Score, Lives/Shields, Streak Multiplier) */}
-      <div className="w-full flex items-center justify-between px-2 py-1 bg-slate-900/80 border border-slate-800 rounded-xl mb-1.5 shadow-sm">
-        {/* Score */}
-        <div className="flex items-center gap-1.5">
-          <Zap className="w-4 h-4 text-emerald-400" />
+      <div className="w-full flex items-center justify-between px-2.5 py-1.5 bg-slate-900/80 border border-slate-800 rounded-xl mb-1.5 shadow-sm">
+        {/* Score & Points Gain */}
+        <div className="flex items-center gap-2">
+          <Zap className="w-4 h-4 text-emerald-400 shrink-0" />
           <div className="flex flex-col text-left">
             <span className="text-[9px] uppercase tracking-wider text-slate-400 font-bold leading-none">Score</span>
-            <span className="text-base sm:text-lg font-black text-white font-mono leading-none mt-0.5">
-              {score}
-            </span>
+            <div className="flex items-center gap-1.5">
+              <span className="text-base sm:text-lg font-black text-white font-mono leading-none mt-0.5">
+                {score}
+              </span>
+              {scoreFloatingNotice && (
+                <span className="text-[11px] font-black text-emerald-300 font-mono bg-emerald-950/90 border border-emerald-500/50 px-2 py-0.5 rounded-full shadow-sm animate-pulse whitespace-nowrap">
+                  {scoreFloatingNotice}
+                </span>
+              )}
+            </div>
           </div>
         </div>
 
@@ -433,15 +440,6 @@ export const LetterFallGame: React.FC<LetterFallGameProps> = ({
           </span>
           <span className="text-slate-400">{wordsCleared} Cleared</span>
         </div>
-
-        {/* Floating Score Notification */}
-        {scoreFloatingNotice && (
-          <div className="absolute top-8 left-1/2 -translate-x-1/2 z-30 pointer-events-none animate-bounce">
-            <span className="px-3 py-1 rounded-full bg-emerald-500 text-slate-950 font-black text-xs shadow-lg uppercase tracking-wider">
-              {scoreFloatingNotice}
-            </span>
-          </div>
-        )}
 
         {/* Dynamic Descending Word Block Container */}
         {challenge && isPlaying && !isGameOver && (

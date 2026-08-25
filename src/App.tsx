@@ -5,6 +5,7 @@ import { Navbar } from './components/Navbar';
 import { WordRushGame } from './components/WordRushGame';
 import { MathRushGame } from './components/MathRushGame';
 import { LetterFallGame } from './components/LetterFallGame';
+import { MathFallGame } from './components/MathFallGame';
 import { WordShifterGame } from './components/WordShifterGame';
 import { ArcadeHubModal } from './components/ArcadeHubModal';
 import { InfoModal } from './components/InfoModal';
@@ -14,6 +15,7 @@ function getGameFromLocation(): GameMode {
   const hash = window.location.hash.toLowerCase();
   const combined = `${pathname} ${hash}`;
 
+  if (combined.includes('/mathfall') || combined.includes('mathfall') || combined.includes('math-fall')) return 'mathfall';
   if (combined.includes('/math') || combined.includes('math')) return 'math';
   if (combined.includes('/letterfall') || combined.includes('letterfall') || combined.includes('letter-fall') || combined.includes('fall')) return 'letterfall';
   if (combined.includes('/shifter') || combined.includes('shifter') || combined.includes('word-shifter') || combined.includes('shift') || combined.includes('diagonal') || combined.includes('matrix')) return 'shifter';
@@ -26,6 +28,8 @@ function getPathForGame(game: GameMode): string {
       return '/math';
     case 'letterfall':
       return '/letterfall';
+    case 'mathfall':
+      return '/mathfall';
     case 'shifter':
     case 'diagonal':
       return '/shifter';
@@ -135,6 +139,14 @@ export default function App() {
         {activeGame === 'letterfall' && (
           <LetterFallGame
             key={`letterfall-${gameResetKey}`}
+            onSelectGame={handleSelectGame}
+            onUpdateHighScores={refreshHighScores}
+            highScores={highScores}
+          />
+        )}
+        {activeGame === 'mathfall' && (
+          <MathFallGame
+            key={`mathfall-${gameResetKey}`}
             onSelectGame={handleSelectGame}
             onUpdateHighScores={refreshHighScores}
             highScores={highScores}

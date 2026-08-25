@@ -20,6 +20,12 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://wordlyrush.netlify.app/mathfall</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://wordlyrush.netlify.app/shifter</loc>
     <lastmod>2026-08-25</lastmod>
     <changefreq>daily</changefreq>

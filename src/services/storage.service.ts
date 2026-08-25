@@ -8,6 +8,9 @@ class StorageService {
   private readonly LETTER_FALL_HIGH_SCORE = 'letter_fall_high_score';
   private readonly LETTER_FALL_BEST_STREAK = 'letter_fall_best_streak';
   private readonly LETTER_FALL_DIFF = 'letter_fall_diff';
+  private readonly MATH_FALL_HIGH_SCORE = 'math_fall_high_score';
+  private readonly MATH_FALL_BEST_STREAK = 'math_fall_best_streak';
+  private readonly MATH_FALL_DIFF = 'math_fall_diff';
   private readonly KEYBOARD_LAYOUT = 'letter_fall_keyboard_layout';
   private readonly SHIFTER_HIGH_SCORE = 'word_shifter_high_score';
   private readonly SHIFTER_BEST_STREAK = 'word_shifter_best_streak';
@@ -28,13 +31,15 @@ class StorageService {
         mathRushStreak: parseInt(localStorage.getItem(this.MATH_BEST_STREAK) || '0', 10) || 0,
         letterFall: parseInt(localStorage.getItem(this.LETTER_FALL_HIGH_SCORE) || '0', 10) || 0,
         letterFallStreak: parseInt(localStorage.getItem(this.LETTER_FALL_BEST_STREAK) || '0', 10) || 0,
+        mathFall: parseInt(localStorage.getItem(this.MATH_FALL_HIGH_SCORE) || '0', 10) || 0,
+        mathFallStreak: parseInt(localStorage.getItem(this.MATH_FALL_BEST_STREAK) || '0', 10) || 0,
         shifter: shifterScore,
         shifterStreak: shifterStreak,
         diagonal: shifterScore,
         diagonalStreak: shifterStreak,
       };
     } catch {
-      return { wordRush: 0, wordRushStreak: 0, mathRush: 0, mathRushStreak: 0, letterFall: 0, letterFallStreak: 0, shifter: 0, shifterStreak: 0, diagonal: 0, diagonalStreak: 0 };
+      return { wordRush: 0, wordRushStreak: 0, mathRush: 0, mathRushStreak: 0, letterFall: 0, letterFallStreak: 0, mathFall: 0, mathFallStreak: 0, shifter: 0, shifterStreak: 0, diagonal: 0, diagonalStreak: 0 };
     }
   }
 
@@ -97,6 +102,28 @@ class StorageService {
     if (streak > current.letterFallStreak) {
       try {
         localStorage.setItem(this.LETTER_FALL_BEST_STREAK, streak.toString());
+        isNewBestStreak = true;
+      } catch {}
+    }
+
+    return { isNewHighScore, isNewBestStreak };
+  }
+
+  public saveMathFallScore(score: number, streak: number): { isNewHighScore: boolean; isNewBestStreak: boolean } {
+    const current = this.getHighScores();
+    let isNewHighScore = false;
+    let isNewBestStreak = false;
+
+    if (score > current.mathFall) {
+      try {
+        localStorage.setItem(this.MATH_FALL_HIGH_SCORE, score.toString());
+        isNewHighScore = true;
+      } catch {}
+    }
+
+    if (streak > current.mathFallStreak) {
+      try {
+        localStorage.setItem(this.MATH_FALL_BEST_STREAK, streak.toString());
         isNewBestStreak = true;
       } catch {}
     }
@@ -177,6 +204,22 @@ class StorageService {
   public setLetterFallDifficulty(diff: FallSpeedDifficulty): void {
     try {
       localStorage.setItem(this.LETTER_FALL_DIFF, diff);
+    } catch {}
+  }
+
+  public getMathFallDifficulty(): FallSpeedDifficulty {
+    try {
+      const val = localStorage.getItem(this.MATH_FALL_DIFF);
+      if (val === 'gentle' || val === 'normal' || val === 'turbo') {
+        return val;
+      }
+    } catch {}
+    return 'normal';
+  }
+
+  public setMathFallDifficulty(diff: FallSpeedDifficulty): void {
+    try {
+      localStorage.setItem(this.MATH_FALL_DIFF, diff);
     } catch {}
   }
 

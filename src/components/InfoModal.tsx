@@ -18,12 +18,14 @@ export const InfoModal: React.FC<InfoModalProps> = ({
   const isWord = activeGame === 'word';
   const isMath = activeGame === 'math';
   const isLetterFall = activeGame === 'letterfall';
+  const isMathFall = activeGame === 'mathfall';
   const isShifter = activeGame === 'shifter' || activeGame === 'diagonal';
 
   const getTitle = () => {
     if (isWord) return 'How to Play Word Rush';
     if (isMath) return 'How to Play Math Rush';
     if (isLetterFall) return 'How to Play Letter Fall';
+    if (isMathFall) return 'How to Play Math Fall';
     return 'How to Play Word Shifter';
   };
 
@@ -31,6 +33,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({
     if (isWord) return 'text-cyan-400';
     if (isMath) return 'text-indigo-400';
     if (isLetterFall) return 'text-emerald-400';
+    if (isMathFall) return 'text-purple-400';
     return 'text-amber-400';
   };
 
@@ -38,6 +41,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({
     if (isWord) return 'bg-cyan-600 hover:bg-cyan-500';
     if (isMath) return 'bg-indigo-600 hover:bg-indigo-500';
     if (isLetterFall) return 'bg-emerald-600 hover:bg-emerald-500';
+    if (isMathFall) return 'bg-purple-600 hover:bg-purple-500';
     return 'bg-amber-600 hover:bg-amber-500 text-slate-950 font-black';
   };
 
@@ -125,6 +129,35 @@ export const InfoModal: React.FC<InfoModalProps> = ({
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                 <p>
                   <strong className="text-white">3 Energy Shields:</strong> Each time a word crashes into the laser floor baseline, you lose 1 Shield. Clear words fast to survive!
+                </p>
+              </div>
+            </>
+          )}
+
+          {isMathFall && (
+            <>
+              <div className="flex items-start gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
+                <p>
+                  <strong className="text-white">Solve Falling Equations:</strong> Single or double digit arithmetic equations fall toward the danger baseline. Complete the missing number or operator before it impacts.
+                </p>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
+                <p>
+                  <strong className="text-white">Full Arithmetic Keypad:</strong> Use numbers <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 font-mono text-purple-300">0-9</kbd> and operators <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 font-mono text-purple-300">+ - × ÷</kbd> from the on-screen keypad or physical keyboard.
+                </p>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
+                <p>
+                  <strong className="text-white">High Catch Multiplier:</strong> Catching equations high up awards extra score multipliers and builds your fire combo streak.
+                </p>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
+                <p>
+                  <strong className="text-white">3 Energy Shields:</strong> Surviving depends on speed. Each crash loses 1 shield. Reach 0 shields and it's game over!
                 </p>
               </div>
             </>

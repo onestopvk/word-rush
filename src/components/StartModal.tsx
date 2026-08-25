@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, Flame, Timer, Zap, Trophy } from 'lucide-react';
+import { Play, Flame, Timer, Zap, Trophy, Gamepad2 } from 'lucide-react';
 import { GameMode } from '../types';
 
 interface StartModalProps {
@@ -12,6 +12,64 @@ interface StartModalProps {
   // Optional mode-specific selector (e.g., Word Rush speed levels)
   children?: React.ReactNode;
 }
+
+interface OtherGameInfo {
+  id: GameMode;
+  icon: string;
+  name: string;
+  category: string;
+  borderHover: string;
+  bgHover: string;
+  textAccent: string;
+}
+
+const ALL_GAMES_METADATA: OtherGameInfo[] = [
+  {
+    id: 'word',
+    icon: '🔤',
+    name: 'Word Rush',
+    category: 'Anagrams',
+    borderHover: 'hover:border-cyan-500/50 hover:bg-cyan-950/40',
+    bgHover: 'group-hover:bg-cyan-950 group-hover:border-cyan-500/40 group-hover:text-cyan-300',
+    textAccent: 'text-cyan-400',
+  },
+  {
+    id: 'math',
+    icon: '🔢',
+    name: 'Math Rush',
+    category: 'Speed Calc',
+    borderHover: 'hover:border-indigo-500/50 hover:bg-indigo-950/40',
+    bgHover: 'group-hover:bg-indigo-950 group-hover:border-indigo-500/40 group-hover:text-indigo-300',
+    textAccent: 'text-indigo-400',
+  },
+  {
+    id: 'letterfall',
+    icon: '🔠',
+    name: 'Letter Fall',
+    category: 'Word Drop',
+    borderHover: 'hover:border-emerald-500/50 hover:bg-emerald-950/40',
+    bgHover: 'group-hover:bg-emerald-950 group-hover:border-emerald-500/40 group-hover:text-emerald-300',
+    textAccent: 'text-emerald-400',
+  },
+  {
+    id: 'mathfall',
+    icon: '➗',
+    name: 'Math Fall',
+    category: 'Equation Drop',
+    borderHover: 'hover:border-purple-500/50 hover:bg-purple-950/40',
+    bgHover: 'group-hover:bg-purple-950 group-hover:border-purple-500/40 group-hover:text-purple-300',
+    textAccent: 'text-purple-400',
+  },
+  {
+    id: 'shifter',
+    icon: '🔀',
+    name: 'Word Shifter',
+    category: 'Word Ladder',
+    borderHover: 'hover:border-amber-500/50 hover:bg-amber-950/40',
+    bgHover: 'group-hover:bg-amber-950 group-hover:border-amber-500/40 group-hover:text-amber-300',
+    textAccent: 'text-amber-400',
+  },
+];
 
 export const StartModal: React.FC<StartModalProps> = ({
   isOpen,
@@ -27,12 +85,14 @@ export const StartModal: React.FC<StartModalProps> = ({
   const isWord = gameMode === 'word';
   const isMath = gameMode === 'math';
   const isLetterFall = gameMode === 'letterfall';
+  const isMathFall = gameMode === 'mathfall';
   const isShifter = gameMode === 'shifter' || gameMode === 'diagonal';
 
   const getThemeBadge = () => {
     if (isWord) return 'bg-cyan-950/80 border border-cyan-500/50 text-cyan-300 shadow-cyan-900/40';
     if (isMath) return 'bg-indigo-950/80 border border-indigo-500/50 text-indigo-300 shadow-indigo-900/40';
     if (isLetterFall) return 'bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 shadow-emerald-900/40';
+    if (isMathFall) return 'bg-purple-950/80 border border-purple-500/50 text-purple-300 shadow-purple-900/40';
     return 'bg-amber-950/80 border border-amber-500/50 text-amber-300 shadow-amber-900/40';
   };
 
@@ -40,6 +100,7 @@ export const StartModal: React.FC<StartModalProps> = ({
     if (isWord) return 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40';
     if (isMath) return 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40';
     if (isLetterFall) return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
+    if (isMathFall) return 'bg-purple-500/20 text-purple-300 border-purple-500/40';
     return 'bg-amber-500/20 text-amber-300 border-amber-500/40';
   };
 
@@ -47,6 +108,7 @@ export const StartModal: React.FC<StartModalProps> = ({
     if (isWord) return '🔤';
     if (isMath) return '🔢';
     if (isLetterFall) return '🔠';
+    if (isMathFall) return '➗';
     return '🔀';
   };
 
@@ -54,6 +116,7 @@ export const StartModal: React.FC<StartModalProps> = ({
     if (isWord) return 'Word Rush';
     if (isMath) return 'Math Rush';
     if (isLetterFall) return 'Letter Fall';
+    if (isMathFall) return 'Math Fall';
     return 'Word Shifter';
   };
 
@@ -61,6 +124,7 @@ export const StartModal: React.FC<StartModalProps> = ({
     if (isWord) return '4-Letter Anagram Blitz';
     if (isMath) return 'Rapid Mental Math Engine';
     if (isLetterFall) return 'Falling 4-Letter Word Drop';
+    if (isMathFall) return 'Falling Arithmetic Equation Drop';
     return '1-Letter Word Ladder Shift';
   };
 
@@ -68,15 +132,11 @@ export const StartModal: React.FC<StartModalProps> = ({
     if (isWord) return 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-cyan-900/40';
     if (isMath) return 'bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-400 hover:to-purple-500 shadow-indigo-900/40';
     if (isLetterFall) return 'bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 shadow-emerald-900/40';
+    if (isMathFall) return 'bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-400 hover:to-pink-500 shadow-purple-900/40';
     return 'bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 shadow-amber-900/40 text-slate-950 font-black';
   };
 
-  const ALL_OTHER_GAMES = [
-    { id: 'word' as GameMode, icon: '🔤', name: 'Word Rush', hoverBg: 'hover:bg-cyan-950/60', hoverBorder: 'hover:border-cyan-500/50', textColor: 'text-cyan-300' },
-    { id: 'math' as GameMode, icon: '🔢', name: 'Math Rush', hoverBg: 'hover:bg-indigo-950/60', hoverBorder: 'hover:border-indigo-500/50', textColor: 'text-indigo-300' },
-    { id: 'letterfall' as GameMode, icon: '🔠', name: 'Letter Fall', hoverBg: 'hover:bg-emerald-950/60', hoverBorder: 'hover:border-emerald-500/50', textColor: 'text-emerald-300' },
-    { id: 'shifter' as GameMode, icon: '🔀', name: 'Word Shifter', hoverBg: 'hover:bg-amber-950/60', hoverBorder: 'hover:border-amber-500/50', textColor: 'text-amber-300' },
-  ].filter(g => (isShifter ? g.id !== 'shifter' : g.id !== gameMode));
+  const otherGames = ALL_GAMES_METADATA.filter(g => (isShifter ? g.id !== 'shifter' : g.id !== gameMode));
 
   return (
     <div
@@ -166,6 +226,13 @@ export const StartModal: React.FC<StartModalProps> = ({
                   <li>• Protect your 3 energy shields to survive</li>
                 </>
               )}
+              {isMathFall && (
+                <>
+                  <li>• Solve missing numbers & operators on falling equations</li>
+                  <li>• Solve high up for maximum speed score bonus</li>
+                  <li>• Protect your 3 energy shields from laser impact</li>
+                </>
+              )}
               {isShifter && (
                 <>
                   <li>• Transform start word to target word 1 letter at a time</li>
@@ -189,23 +256,39 @@ export const StartModal: React.FC<StartModalProps> = ({
             <span>Start {getGameTitle()}</span>
           </button>
 
-          {/* Direct Switcher to Other Modes */}
-          <div className="pt-2 border-t border-slate-800/80">
-            <div className="text-[9px] uppercase tracking-wider text-slate-500 font-extrabold mb-1.5 text-center">
-              Or Switch Arcade Mode
+          {/* Clean Symmetrical Switcher to Other Modes */}
+          <div className="pt-2.5 border-t border-slate-800/80">
+            <div className="flex items-center justify-between px-1 mb-1.5">
+              <span className="text-[10px] uppercase tracking-wider text-slate-400 font-extrabold flex items-center gap-1.5">
+                <Gamepad2 className="w-3 h-3 text-slate-400" />
+                <span>Other Arcade Games</span>
+              </span>
+              <span className="text-[9px] text-slate-500 font-semibold font-mono">
+                Tap to Switch
+              </span>
             </div>
-            <div className="grid grid-cols-3 gap-1.5">
-              {ALL_OTHER_GAMES.map((g) => (
+
+            <div className="grid grid-cols-2 gap-1.5">
+              {otherGames.map((g) => (
                 <button
                   key={g.id}
                   id={`startSwitchTo_${g.id}`}
                   type="button"
                   onClick={() => onSelectGame(g.id)}
-                  className={`py-1.5 px-1 rounded-xl bg-slate-950/80 ${g.hoverBg} border border-slate-800 ${g.hoverBorder} ${g.textColor} font-bold text-[11px] flex items-center justify-center gap-1 transition-all cursor-pointer shadow-sm active:scale-95 truncate`}
-                  title={`Switch to ${g.name}`}
+                  className={`group p-1.5 sm:p-2 rounded-xl bg-slate-950/80 border border-slate-800/90 ${g.borderHover} flex items-center gap-2 text-left transition-all active:scale-95 cursor-pointer shadow-sm`}
+                  title={`Switch to ${g.name} (${g.category})`}
                 >
-                  <span className="shrink-0">{g.icon}</span>
-                  <span className="truncate">{g.name}</span>
+                  <div className={`w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-sm shrink-0 transition-colors ${g.bgHover}`}>
+                    {g.icon}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-xs font-black text-slate-200 group-hover:text-white leading-tight truncate">
+                      {g.name}
+                    </div>
+                    <div className={`text-[10px] ${g.textAccent} font-semibold leading-tight truncate`}>
+                      {g.category}
+                    </div>
+                  </div>
                 </button>
               ))}
             </div>
@@ -215,3 +298,4 @@ export const StartModal: React.FC<StartModalProps> = ({
     </div>
   );
 };
+

@@ -1,4 +1,4 @@
-export type GameMode = 'word' | 'math' | 'letterfall' | 'shifter' | 'diagonal';
+export type GameMode = 'word' | 'math' | 'letterfall' | 'mathfall' | 'shifter' | 'diagonal';
 
 export type WordDifficulty = 'easy' | 'medium' | 'hard';
 export type FallSpeedDifficulty = 'gentle' | 'normal' | 'turbo';
@@ -53,6 +53,21 @@ export interface FallingWordChallenge {
   allValidAnswers: string[];
 }
 
+export interface FallingMathChallenge {
+  id: string;
+  leftNum: number;
+  operator: '+' | '-' | '×' | '÷';
+  rightNum: number;
+  result: number;
+  missingPart: 'result' | 'operator' | 'left' | 'right';
+  displayText: string;
+  correctAnswer: string;
+  displayLeft: string;
+  displayOp: string;
+  displayRight: string;
+  displayResult: string;
+}
+
 export interface ShifterChallenge {
   startWord: string;
   targetWord: string;
@@ -82,6 +97,8 @@ export interface GameHighScores {
   mathRushStreak: number;
   letterFall: number;
   letterFallStreak: number;
+  mathFall: number;
+  mathFallStreak: number;
   shifter: number;
   shifterStreak: number;
   diagonal: number;
