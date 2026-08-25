@@ -1,6 +1,6 @@
 {
-  "name": "Word Rush",
-  "description": "Fast-paced speed arcade suite featuring Word Rush 4-letter anagram scramble, Math Rush speed arithmetic, Letter Fall falling word drop, and Word Shifter 1-letter word ladder transformation with timer, customizable keyboard layouts, and combo scoring.",
+  "name": "Arcade Rush",
+  "description": "Fast-paced Wordle alternative and speed word based games suite featuring Word Rush 4-letter anagram scramble, Word Shifter 1-letter word ladder transformation, Letter Fall falling word drop, and Math Rush arithmetic.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

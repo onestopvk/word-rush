@@ -49,5 +49,5 @@ Disallow: /api/private/
 Disallow: /*.json$
 
 # Sitemaps
-Sitemap: /sitemap.xml
+Sitemap: https://wordlyrush.netlify.app/sitemap.xml
 
