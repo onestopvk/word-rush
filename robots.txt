@@ -1,0 +1,53 @@
+# ==============================================================================
+# robots.txt for Arcade Rush & Word Rush
+# ==============================================================================
+
+# Default rules for all search engines and web crawlers
+User-agent: *
+Allow: /
+
+# Major search engine crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# AI crawlers and assistants
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Disallow crawling of any temporary or build artifacts if exposed
+Disallow: /api/private/
+Disallow: /*.json$
+
+# Sitemaps
+Sitemap: /sitemap.xml
+
